@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoteChain</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+        :root {
+            --bg-color: #0f0f1e;
+            --text-color: #ffffff;
+            --primary-color: #4CAF50;
+            --secondary-color: #2196F3;
+            --card-bg: rgba(255, 255, 255, 0.1);
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #1a1a3a, #2a2a5a);
+            animation: gradientShift 15s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .connect-wallet {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .connect-wallet:hover {
+            background-color: #45a049;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            background: none;
+            border: none;
+            color: white;
+            width: 100%;
+            padding: 5px;
+            outline: none;
+            font-size: 16px;
+        }
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .filter-button {
+            background-color: var(--card-bg);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+        .filter-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .spaces-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .space-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .space-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .space-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 2px solid var(--primary-color);
+        }
+        .space-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .space-members {
+            font-size: 14px;
+            color: #aaaaaa;
+            margin-bottom: 15px;
+        }
+        .join-button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+        }
+        .join-button:hover {
+            background-color: #1e87db;
+        }
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .connect-wallet {
+                margin-top: 10px;
+                text-align: center;
+            }
+            .filters {
+                flex-direction: column;
+            }
+            .spaces-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <div class="header">
+            <div class="logo">VoteChain</div>
+            <button class="connect-wallet">Connect wallet</button>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search spaces...">
+        </div>
+        <div class="filters">
+            <button class="filter-button">Spaces ▼</button>
+            <button class="filter-button">Category ▼</button>
+            <div class="filter-button">74K space(s)</div>
+        </div>
+        <div class="spaces-grid">
+            <div class="space-card">
+                <img src="/api/placeholder/80/80" alt="Aave" class="space-logo">
+                <div class="space-name">Aave ✓</div>
+                <div class="space-members">144K members</div>
+                <button class="join-button">Join</button>
+            </div>
+            <div class="space-card">
+                <img src="/api/placeholder/80/80" alt="ENS" class="space-logo">
+                <div class="space-name">ENS ✓</div>
+                <div class="space-members">137K members</div>
+                <button class="join-button">Join</button>
+            </div>
+            <div class="space-card">
+                <img src="/api/placeholder/80/80" alt="ApeCoin DAO" class="space-logo">
+                <div class="space-name">ApeCoin DAO ✓</div>
+                <div class="space-members">29K members</div>
+                <button class="join-button">Join</button>
+            </div>
+            <div class="space-card">
+                <img src="/api/placeholder/80/80" alt="Balancer" class="space-logo">
+                <div class="space-name">Balancer ✓</div>
+                <div class="space-members">34K members</div>
+                <button class="join-button">Join</button>
+            </div>
+            <div class="space-card">
+                <img src="/api/placeholder/80/80" alt="Lido" class="space-logo">
+                <div class="space-name">Lido ✓</div>
+                <div class="space-members">30K members</div>
+                <button class="join-button">Join</button>
+            </div>
+            <div class="space-card">
+                <img src="/api/placeholder/80/80" alt="Starknet" class="space-logo">
+                <div class="space-name">Starknet ✓</div>
+                <div class="space-members">65K members</div>
+                <button class="join-button">Join</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
