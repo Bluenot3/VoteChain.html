@@ -1,0 +1,103 @@
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { Wallet } from 'lucide-react';
+
+// Mock function to simulate NEAR wallet connection
+const connectNearWallet = () => new Promise((resolve) => {
+  setTimeout(() => resolve({ accountId: `user${Math.floor(Math.random() * 1000)}@near` }), 1000);
+});
+
+// Mock function to simulate voting
+const castVote = (designerId, voterAccountId) => new Promise((resolve) => {
+  setTimeout(() => resolve({ success: true }), 1000);
+});
+
+const DesignerVotingDashboard = () => {
+  const [designers, setDesigners] = useState([
+    { id: 1, name: 'Alice', votes: 0 },
+    { id: 2, name: 'Bob', votes: 0 },
+    { id: 3, name: 'Charlie', votes: 0 },
+  ]);
+  const [wallet, setWallet] = useState(null);
+  const [votingStatus, setVotingStatus] = useState('');
+
+  const handleConnectWallet = async () => {
+    try {
+      const connectedWallet = await connectNearWallet();
+      setWallet(connectedWallet);
+    } catch (error) {
+      console.error('Failed to connect wallet:', error);
+    }
+  };
+
+  const handleVote = async (designerId) => {
+    if (!wallet) {
+      setVotingStatus('Please connect your NEAR wallet first.');
+      return;
+    }
+
+    setVotingStatus('Casting your vote...');
+    try {
+      const result = await castVote(designerId, wallet.accountId);
+      if (result.success) {
+        setDesigners(designers.map(d =>
+          d.id === designerId ? { ...d, votes: d.votes + 1 } : d
+        ));
+        setVotingStatus('Vote cast successfully!');
+      }
+    } catch (error) {
+      console.error('Voting failed:', error);
+      setVotingStatus('Voting failed. Please try again.');
+    }
+  };
+
+  return (
+    <Card className="w-full max-w-4xl mx-auto">
+      <CardHeader className="text-2xl font-bold">Generative Designer Voting Dashboard</CardHeader>
+      <CardContent>
+        <div className="mb-4">
+          {wallet ? (
+            <Alert>
+              <AlertDescription>Connected: {wallet.accountId}</AlertDescription>
+            </Alert>
+          ) : (
+            <Button onClick={handleConnectWallet}>
+              <Wallet className="mr-2 h-4 w-4" /> Connect NEAR Wallet
+            </Button>
+          )}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          {designers.map((designer) => (
+            <Card key={designer.id}>
+              <CardHeader>{designer.name}</CardHeader>
+              <CardContent>Votes: {designer.votes}</CardContent>
+              <CardFooter>
+                <Button onClick={() => handleVote(designer.id)} disabled={!wallet}>
+                  Vote
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+        {votingStatus && (
+          <Alert className="mb-4">
+            <AlertDescription>{votingStatus}</AlertDescription>
+          </Alert>
+        )}
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={designers}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="votes" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default DesignerVotingDashboard;
