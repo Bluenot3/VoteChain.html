@@ -1,0 +1,234 @@
+<html><head><base href="https://votechain.near"><title>VoteChain</title><style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0f0f1e;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  .background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(45deg, #1a1a3a, #2a2a5a);
+    animation: gradientShift 15s ease infinite;
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+  .sidebar {
+    width: 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    backdrop-filter: blur(10px);
+  }
+  .sidebar-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 20px;
+    fill: #ffffff;
+    transition: fill 0.3s ease;
+  }
+  .sidebar-icon:hover {
+    fill: #4CAF50;
+  }
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .logo {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #4CAF50, #2196F3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .connect-wallet {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .connect-wallet:hover {
+    background-color: #45a049;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin-bottom: 20px;
+  }
+  .search-bar input {
+    background: none;
+    border: none;
+    color: white;
+    width: 100%;
+    padding: 5px;
+    outline: none;
+  }
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .filter-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .filter-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .spaces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .space-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .space-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  .space-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #4CAF50;
+  }
+  .space-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .space-members {
+    font-size: 14px;
+    color: #aaaaaa;
+    margin-bottom: 15px;
+  }
+  .join-button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .join-button:hover {
+    background-color: #1e87db;
+  }
+</style></head>
+<body>
+  <div class="background-animation"></div>
+  <div class="container">
+    <div class="sidebar">
+      <svg class="sidebar-icon" viewBox="0 0 24 24">
+        <path d="M3.55 18.54l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8zM11 22.45h2V19.5h-2v2.95zM4 10.5H1v2h3v-2zm11-4.19V1.5H9v4.81C7.21 7.35 6 9.28 6 11.5c0 3.31 2.69 6 6 6s6-2.69 6-6c0-2.22-1.21-4.15-3-5.19zm5 4.19v2h3v-2h-3zm-2.76 7.66l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4z"/>
+      </svg>
+      <svg class="sidebar-icon" viewBox="0 0 24 24">
+        <path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/>
+      </svg>
+      <svg class="sidebar-icon" viewBox="0 0 24 24">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+      </svg>
+    </div>
+    <div class="main-content">
+      <div class="header">
+        <div class="logo">VoteChain</div>
+        <button class="connect-wallet">Connect wallet</button>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search">
+      </div>
+      <div class="filters">
+        <button class="filter-button">Spaces ▼</button>
+        <button class="filter-button">Category ▼</button>
+        <div>74K space(s)</div>
+      </div>
+      <div class="spaces-grid">
+        <div class="space-card">
+          <img src="aave-logo.png" alt="Aave" class="space-logo">
+          <div class="space-name">Aave ✓</div>
+          <div class="space-members">144K members</div>
+          <button class="join-button">Join</button>
+        </div>
+        <div class="space-card">
+          <img src="ens-logo.png" alt="ENS" class="space-logo">
+          <div class="space-name">ENS ✓</div>
+          <div class="space-members">137K members</div>
+          <button class="join-button">Join</button>
+        </div>
+        <div class="space-card">
+          <img src="apecoin-logo.png" alt="ApeCoin DAO" class="space-logo">
+          <div class="space-name">ApeCoin DAO ✓</div>
+          <div class="space-members">29K members</div>
+          <button class="join-button">Join</button>
+        </div>
+        <div class="space-card">
+          <img src="balancer-logo.png" alt="Balancer" class="space-logo">
+          <div class="space-name">Balancer ✓</div>
+          <div class="space-members">34K members</div>
+          <button class="join-button">Join</button>
+        </div>
+        <div class="space-card">
+          <img src="lido-logo.png" alt="Lido" class="space-logo">
+          <div class="space-name">Lido ✓</div>
+          <div class="space-members">30K members</div>
+          <button class="join-button">Join</button>
+        </div>
+        <div class="space-card">
+          <img src="starknet-logo.png" alt="Starknet" class="space-logo">
+          <div class="space-name">Starknet ✓</div>
+          <div class="space-members">65K members</div>
+          <button class="join-button">Join</button>
+        </div>
+        <div class="space-card">
+          <img src="safedao-logo.png" alt="SafeDAO" class="space-logo">
+          <div class="space-name">SafeDAO ✓</div>
+          <div class="space-members">15K members</div>
+          <button class="join-button">Join</button>
+        </div>
+        <div class="space-card">
+          <img src="heroes-of-mavia-logo.png" alt="Heroes of Mavia" class="space-logo">
+          <div class="space-name">Heroes of Mavia ✓</div>
+          <div class="space-members">7.5K members</div>
+          <button class="join-button">Join</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>
